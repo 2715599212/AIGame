@@ -11,13 +11,13 @@
 # os.environ['KERAS_BACKEND']='theano'
 import numpy as np
 # 按顺序建立的神经网络
-from keras.models import Sequential
+from tensorflow.keras.models import Sequential
 # dense是全连接层，这里选择你要用的神经网络层参数
-from keras.layers import LSTM, TimeDistributed, Dense, Activation,Convolution2D, MaxPooling2D, Flatten
+from tensorflow.keras.layers import LSTM, TimeDistributed, Dense, Activation,Convolution2D, MaxPooling2D, Flatten
 # 选择优化器
-from keras.optimizers import Adam, RMSprop
+from tensorflow.keras.optimizers import Adam, RMSprop
 # 画图
-from keras.utils import plot_model
+from tensorflow.keras.utils import plot_model
 
 # Deep Q Network off-policy
 class DeepQNetwork:
