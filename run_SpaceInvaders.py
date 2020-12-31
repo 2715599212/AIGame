@@ -26,21 +26,41 @@ print(env.reward_range)
 inputImageSize = (100, 80, 1)
 # inputImageSize[2] = 1
 
+print("从头：1||继续：2")
+go = input("请选择：")
+go = int(go)
+if go==1:
+    with open('log.txt','w') as f:
+        f.write('')
+        f.close()
+    with open('reward.txt','w') as f:
+        f.write('')
+        f.close()
+    epsilon = 0
+    weights_path = None
+elif go == 2:
+    with open('epsilon.txt','r') as f:
+        epsilon = f.readline()
+        f.close()
+    epsilon = float(epsilon)
+    weights_path = 'weights\\eval_weights'
+else:
+    exit()
 RL = DeepQNetwork(n_actions=env.action_space.n,
                   n_features=env.observation_space.shape[0],
                   observation_shape=inputImageSize,
                   learning_rate=0.01, epsilon_max=0.9,
                   replace_target_iter=100, memory_size=2000,
                   e_greedy_increment=0.0001,
-                  output_graph=True)
+                  output_graph=True,
+                  go = go,
+                  epsilon = epsilon,
+                  weights_path = weights_path)
 
 total_steps = 0
 
-
-thread1 = myThread(1, "Thread-1", 1)
-thread1.start()
 total_reward_list = []
-for i_episode in range(1000):
+for i_episode in range(1000000):
 
     observation = env.reset()
     # 使用opencv做灰度化处理
@@ -48,32 +68,24 @@ for i_episode in range(1000):
     observation = cv2.resize(observation, (inputImageSize[1], inputImageSize[0]))
     total_reward = 0
     while True:
-        #env.render()
-        
-        # observation_, reward, done, info = env.step(env.action_space.sample())
-        # print(env.action_space.sample())
-        # # observation_, reward, done, info = env.step(4)  # 4是发送子弹 2、3分别是左右
-        # if reward > 0:
-        #     print(reward)
+        env.render()
+
         action = RL.choose_action(observation)
 
         observation_, reward, done, info = env.step(action)
-        # 给reward做归一化处理
+
         reward = reward / 200
-        # 使用opencv做灰度化处理
+
         observation_ = cv2.cvtColor(observation_, cv2.COLOR_BGR2GRAY)
         observation_ = cv2.resize(observation_, (inputImageSize[1], inputImageSize[0]))
-        # cv2.imshow('obe', observation_)
 
         RL.store_transition(observation, action, reward, observation_)
 
         total_reward += reward
-        if total_steps > 1000 and total_steps % 2 == 0 and thread1.learn_flag == 1:
+        if total_steps > 1024 and total_steps % 8 == 0:
             t0 = time.time()
             RL.learn()
             t1 = time.time()
-            if total_steps < 1010:
-                print("学习一次时间：", t1 - t0)
 
         if done:
             total_reward_list.append(total_reward)
@@ -81,11 +93,26 @@ for i_episode in range(1000):
                   'total_reward: ', round(total_reward, 2),
                   ' epsilon: ', round(RL.epsilon, 2))
             # plot_reward()
-            print('total reward list:', total_reward_list)
+            # print('total reward list:', total_reward_list)
             break
 
         observation = observation_
         total_steps += 1
+    if i_episode%5==0:
+        with open('log.txt','a') as f:
+            for item in RL.cost_his:
+                f.write(str(item)+'\n')
+            f.close()
+            RL.cost_his = []
+        with open('reward.txt', 'a') as f:
+            for item in total_reward_list:
+                f.write(str(item) + '\n')
+            f.close()
+            total_reward_list = []
+        with open('epsilon.txt', 'w') as f:
+            f.write(str(RL.epsilon))
+            f.close()
+        RL.model_eval.save_weights('weights\\eval_weights', save_format='tf')
 
 RL.plot_cost()
 

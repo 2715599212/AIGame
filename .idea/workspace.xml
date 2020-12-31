@@ -20,7 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b58ea79a-de56-48d6-9feb-afbb4ca2e09d" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/plot_cost.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RL_brain_CNNLSTM.py" beforeDir="false" afterPath="$PROJECT_DIR$/RL_brain_CNNLSTM.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reward.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/run_SpaceInvaders.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_SpaceInvaders.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,19 +43,6 @@
         <option value="Python Script" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>replace_target_op</find>
-      <find>cost_his</find>
-      <find>predict</find>
-      <find>SpaceInvaders</find>
-      <find>memory</find>
-      <find>self.memory</find>
-      <find>batch_memory</find>
-      <find>memoryList</find>
-      <find>memoryObservationNow</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -82,7 +73,28 @@
       <recent name="E:\PycharmProjects\AIGame" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.run_Breakout">
+  <component name="RunManager" selected="Python.run_SpaceInvaders">
+    <configuration name="plot_cost" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AIGame" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/plot_cost.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="run_Breakout" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AIGame" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -171,15 +183,17 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.run_Breakout" />
-      <item itemvalue="Python.run_CartPole" />
-      <item itemvalue="Python.run_SpaceInvaders" />
       <item itemvalue="Python.test" />
+      <item itemvalue="Python.run_SpaceInvaders" />
+      <item itemvalue="Python.run_CartPole" />
+      <item itemvalue="Python.run_Breakout" />
+      <item itemvalue="Python.plot_cost" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.run_Breakout" />
         <item itemvalue="Python.run_SpaceInvaders" />
+        <item itemvalue="Python.plot_cost" />
+        <item itemvalue="Python.run_Breakout" />
         <item itemvalue="Python.run_CartPole" />
         <item itemvalue="Python.test" />
       </list>
@@ -214,30 +228,35 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
   <component name="WindowStateProjectService">
-    <state width="1364" height="197" key="GridCell.Tab.0.bottom" timestamp="1604333824295">
+    <state width="1630" height="205" key="GridCell.Tab.0.bottom" timestamp="1609401782209">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1364" height="195" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1609385902950" />
+    <state width="1630" height="205" key="GridCell.Tab.0.bottom/0.0.2560.1400/3840.767.1536.824@0.0.2560.1400" timestamp="1609401782209" />
+    <state width="1630" height="205" key="GridCell.Tab.0.center" timestamp="1609401782209">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1364" height="195" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1609385902950" />
+    <state width="1630" height="205" key="GridCell.Tab.0.center/0.0.2560.1400/3840.767.1536.824@0.0.2560.1400" timestamp="1609401782209" />
+    <state width="1630" height="205" key="GridCell.Tab.0.left" timestamp="1609401782209">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1364" height="195" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1609385902949" />
+    <state width="1630" height="205" key="GridCell.Tab.0.left/0.0.2560.1400/3840.767.1536.824@0.0.2560.1400" timestamp="1609401782209" />
+    <state width="1630" height="205" key="GridCell.Tab.0.right" timestamp="1609401782209">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1364" height="195" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1609385902950" />
+    <state width="1630" height="205" key="GridCell.Tab.0.right/0.0.2560.1400/3840.767.1536.824@0.0.2560.1400" timestamp="1609401782209" />
+    <state x="292" y="59" key="SettingsEditor" timestamp="1609385189848">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1364" height="197" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1604333824295" />
-    <state width="1364" height="197" key="GridCell.Tab.0.center" timestamp="1604333824295">
+    <state x="292" y="59" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1609385189848" />
+    <state x="519" y="145" key="search.everywhere.popup" timestamp="1609385899463">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1364" height="197" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1604333824295" />
-    <state width="1364" height="197" key="GridCell.Tab.0.left" timestamp="1604333824295">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1364" height="197" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1604333824295" />
-    <state width="1364" height="197" key="GridCell.Tab.0.right" timestamp="1604333824295">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1364" height="197" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1604333824295" />
-    <state x="292" y="59" key="SettingsEditor" timestamp="1609383121263">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="292" y="59" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1609383121263" />
+    <state x="519" y="145" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1609385899463" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -247,7 +266,28 @@
           <line>120</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/plot_cost.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/run_SpaceInvaders.py</url>
+          <line>44</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/run_SpaceInvaders.py</url>
+          <line>40</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="self.learn_step_counter" />
+        <watch expression="self.replace_target_iter" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

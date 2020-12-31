@@ -13,7 +13,7 @@ import numpy as np
 # 按顺序建立的神经网络
 from tensorflow.keras.models import Sequential
 # dense是全连接层，这里选择你要用的神经网络层参数
-from tensorflow.keras.layers import LSTM, TimeDistributed, Dense, Activation,Convolution2D, MaxPooling2D, Flatten
+from tensorflow.keras.layers import Dense, Activation,Convolution2D, MaxPooling2D, Flatten
 # 选择优化器
 from tensorflow.keras.optimizers import Adam, RMSprop
 # 画图
@@ -35,7 +35,10 @@ class DeepQNetwork:
             e_greedy_increment=None,
             output_graph=True,
             first_layer_neurno=4,
-            second_layer_neurno=1
+            second_layer_neurno=1,
+            go=None,
+            epsilon = None,
+            weights_path = None
     ):
         self.n_actions = n_actions
         self.n_features = n_features
@@ -47,9 +50,11 @@ class DeepQNetwork:
         self.memory_size = memory_size
         self.batch_size = batch_size
         self.epsilon_increment = e_greedy_increment
-        self.epsilon = 0 if e_greedy_increment is not None else self.epsilon_max  # e_greedy_increment 通过神经网络选择的概率慢慢增加
+        self.epsilon = epsilon if e_greedy_increment is not None else self.epsilon_max  # e_greedy_increment 通过神经网络选择的概率慢慢增加
         self.first_layer_neurno = first_layer_neurno
         self.second_layer_neurno = second_layer_neurno
+        self.go=go
+        self.weights_path = weights_path
 
         # total learning step
         self.learn_step_counter = 0
@@ -77,10 +82,6 @@ class DeepQNetwork:
         self.reward = []
 
     def _build_net(self):
-        # ------------------ 建造估计层 ------------------
-        # 因为神经网络在这个地方只是用来输出不同动作对应的Q值，最后的决策是用Q表的选择来做的
-        # 所以其实这里的神经网络可以看做是一个线性的，也就是通过不同的输入有不同的输出，而不是确定类别的几个输出
-        # 这里我们先按照上一个例子造一个两层每层单个神经元的神经网络
         self.model_eval = Sequential([
             # 输入第一层是一个二维卷积层(100, 80, 1)
             Convolution2D(                              # 就是Conv2D层
@@ -121,14 +122,17 @@ class DeepQNetwork:
             Activation('relu'),
             Dense(self.n_actions),
         ])
-        # 选择rms优化器，输入学习率参数
+
+        if self.go == 1:
+            pass
+        else:
+            self.model_eval.load_weights(self.weights_path)
+
         rmsprop = RMSprop(lr=self.lr, rho=0.9, epsilon=1e-08, decay=0.0)
         self.model_eval.compile(loss='mse',
                             optimizer=rmsprop,
                             metrics=['accuracy'])
 
-        # ------------------ 构建目标神经网络 ------------------
-        # 目标神经网络的架构必须和估计神经网络一样，但是不需要计算损失函数
         self.model_target = Sequential([
             Convolution2D(  # 就是Conv2D层
                 batch_input_shape=(None, self.observation_shape[0], self.observation_shape[1],
@@ -236,34 +240,6 @@ class DeepQNetwork:
 
         q_target[batch_index, eval_act_index] = reward + self.gamma * np.max(q_next, axis=1)
 
-        """
-          假如在这个 batch 中, 我们有2个提取的记忆, 根据每个记忆可以生产3个 action 的值:
-        q_eval =
-        [[1, 2, 3],
-         [4, 5, 6]]
-
-        q_target = q_eval =
-        [[1, 2, 3],
-         [4, 5, 6]]
-
-        然后根据 memory 当中的具体 action 位置来修改 q_target 对应 action 上的值:
-        比如在:
-            记忆 0 的 q_target 计算值是 -1, 而且我用了 action 0;
-            记忆 1 的 q_target 计算值是 -2, 而且我用了 action 2:
-        q_target =
-        [[-1, 2, 3],
-         [4, 5, -2]]
-
-        所以 (q_target - q_eval) 就变成了:
-        [[(-1)-(1), 0, 0],
-         [0, 0, (-2)-(6)]]
-
-        最后我们将这个 (q_target - q_eval) 当成误差, 反向传递会神经网络.
-        所有为 0 的 action 值是当时没有选择的 action, 之前有选择的 action 才有不为0的值.
-        我们只反向传递之前选择的 action 的值,
-        """
-
-        # 训练估计网络，用的是当前观察值训练，并且训练选择到的q数据数据 是加奖励训练 而不是没选择的
         self.cost = self.model_eval.train_on_batch(batch_memoryONow, q_target)
 
         self.cost_his.append(self.cost)
