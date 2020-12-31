@@ -90,7 +90,7 @@ class DeepQNetwork:
                 kernel_size=5,                          # 卷积核的宽度和长度。如为单个整数，则表示在各个空间维度的相同长度。
                 strides=1,                              # 每次滑动大小
                 padding='same',                         # Padding 的方法也就是过滤后数据xy大小是否和之前的一样
-                data_format='channels_last',           # 表示图像通道维的位置，这里rgb图像是最后一维表示通道
+                #data_format='channels_last',           # 表示图像通道维的位置，这里rgb图像是最后一维表示通道
             ),
             Activation('relu'),
             # 输出(100, 80, 15)
@@ -99,13 +99,17 @@ class DeepQNetwork:
                 pool_size=2,                            # 池化窗口大小
                 strides=2,                              # 下采样因子
                 padding='same',                         # Padding method
-                data_format='channels_last',
+                #data_format='channels_last',
             ),
             # output(50, 40, 30)
-            Convolution2D(30, 5, strides=1, padding='same', data_format='channels_last'),
+            Convolution2D(30, 5, strides=1, padding='same',
+                          #data_format='channels_last'
+            ),
             Activation('relu'),
             # (10, 8, 30)
-            MaxPooling2D(5, 5, 'same', data_format='channels_first'),
+            MaxPooling2D(5, 5, 'same',
+                         #data_format='channels_first'
+                         ),
             # (10, 8, 30)
             Flatten(),
             # LSTM(
@@ -133,7 +137,7 @@ class DeepQNetwork:
                 kernel_size=5,  # 卷积核的宽度和长度。如为单个整数，则表示在各个空间维度的相同长度。
                 strides=1,  # 每次滑动大小
                 padding='same',  # Padding 的方法也就是过滤后数据xy大小是否和之前的一样
-                data_format='channels_last',  # 表示图像通道维的位置，这里rgb图像是最后一维表示通道
+                #data_format='channels_last',  # 表示图像通道维的位置，这里rgb图像是最后一维表示通道
             ),
             Activation('relu'),
             # 输出（210， 160， 30）
@@ -142,13 +146,17 @@ class DeepQNetwork:
                 pool_size=2,  # 池化窗口大小
                 strides=2,  # 下采样因子
                 padding='same',  # Padding method
-                data_format='channels_last',
+                #data_format='channels_last',
             ),
             # output(105, 80, 60)
-            Convolution2D(30, 5, strides=1, padding='same', data_format='channels_last'),
+            Convolution2D(30, 5, strides=1, padding='same',
+                          #data_format='channels_last'
+                          ),
             Activation('relu'),
             # (21, 16, 60)
-            MaxPooling2D(5, 5, 'same', data_format='channels_first'),
+            MaxPooling2D(5, 5, 'same',
+                         #data_format='channels_first'
+                         ),
             # 21 * 16 * 60 = 20160
             Flatten(),
             # LSTM(
