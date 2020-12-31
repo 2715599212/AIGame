@@ -14,12 +14,14 @@ from receiveThread import myThread
 env = gym.make('SpaceInvaders-v0')
 env = env.unwrapped
 
+'''
 print(env.action_space)
 # print(env.observation_space)
 print(env.observation_space.shape)
 print(env.observation_space.high)
 print(env.observation_space.low)
 print(env.reward_range)
+'''
 
 inputImageSize = (100, 80, 1)
 # inputImageSize[2] = 1
