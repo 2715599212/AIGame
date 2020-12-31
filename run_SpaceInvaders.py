@@ -48,7 +48,8 @@ for i_episode in range(1000):
     observation = cv2.resize(observation, (inputImageSize[1], inputImageSize[0]))
     total_reward = 0
     while True:
-        env.render()
+        #env.render()
+        
         # observation_, reward, done, info = env.step(env.action_space.sample())
         # print(env.action_space.sample())
         # # observation_, reward, done, info = env.step(4)  # 4是发送子弹 2、3分别是左右
