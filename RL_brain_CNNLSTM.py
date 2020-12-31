@@ -36,9 +36,7 @@ class DeepQNetwork:
             output_graph=True,
             first_layer_neurno=4,
             second_layer_neurno=1,
-            go=None,
             epsilon = None,
-            weights_path = None
     ):
         self.n_actions = n_actions
         self.n_features = n_features
@@ -53,8 +51,6 @@ class DeepQNetwork:
         self.epsilon = epsilon if e_greedy_increment is not None else self.epsilon_max  # e_greedy_increment 通过神经网络选择的概率慢慢增加
         self.first_layer_neurno = first_layer_neurno
         self.second_layer_neurno = second_layer_neurno
-        self.go=go
-        self.weights_path = weights_path
 
         # total learning step
         self.learn_step_counter = 0
@@ -122,16 +118,6 @@ class DeepQNetwork:
             Activation('relu'),
             Dense(self.n_actions),
         ])
-
-        if self.go == 1:
-            pass
-        else:
-            self.model_eval.load_weights(self.weights_path)
-
-        rmsprop = RMSprop(lr=self.lr, rho=0.9, epsilon=1e-08, decay=0.0)
-        self.model_eval.compile(loss='mse',
-                            optimizer=rmsprop,
-                            metrics=['accuracy'])
 
         self.model_target = Sequential([
             Convolution2D(  # 就是Conv2D层

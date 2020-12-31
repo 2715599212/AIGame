@@ -5,6 +5,7 @@ Deep Q network,
 
 
 import gym
+from tensorflow.keras.optimizers import Adam, RMSprop
 from RL_brain_CNNLSTM import DeepQNetwork
 import cv2
 import numpy as np
@@ -25,6 +26,7 @@ print(env.reward_range)
 
 inputImageSize = (100, 80, 1)
 # inputImageSize[2] = 1
+weights_path = 'weights\\eval_weights'
 
 print("从头：1||继续：2")
 go = input("请选择：")
@@ -37,13 +39,11 @@ if go==1:
         f.write('')
         f.close()
     epsilon = 0
-    weights_path = None
 elif go == 2:
     with open('epsilon.txt','r') as f:
         epsilon = f.readline()
         f.close()
     epsilon = float(epsilon)
-    weights_path = 'weights\\eval_weights'
 else:
     exit()
 RL = DeepQNetwork(n_actions=env.action_space.n,
@@ -53,9 +53,13 @@ RL = DeepQNetwork(n_actions=env.action_space.n,
                   replace_target_iter=100, memory_size=2000,
                   e_greedy_increment=0.0001,
                   output_graph=True,
-                  go = go,
-                  epsilon = epsilon,
-                  weights_path = weights_path)
+                  epsilon = epsilon)
+if go==2:
+    RL.model_eval.load_weights(weights_path)
+rmsprop = RMSprop(lr=RL.lr, rho=0.9, epsilon=1e-08, decay=0.0)
+RL.model_eval.compile(loss='mse',
+                    optimizer=rmsprop,
+                    metrics=['accuracy'])
 
 total_steps = 0
 

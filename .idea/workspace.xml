@@ -20,11 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b58ea79a-de56-48d6-9feb-afbb4ca2e09d" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/plot_cost.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/RL_brain_CNNLSTM.py" beforeDir="false" afterPath="$PROJECT_DIR$/RL_brain_CNNLSTM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reward.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/run_SpaceInvaders.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_SpaceInvaders.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -273,12 +270,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run_SpaceInvaders.py</url>
-          <line>44</line>
+          <line>45</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/run_SpaceInvaders.py</url>
-          <line>40</line>
+          <line>41</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
